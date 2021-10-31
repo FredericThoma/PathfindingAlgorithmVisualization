@@ -1,4 +1,4 @@
-from algorithms.algorithm import *
+from src.algorithms.algorithm import *
 
 
 class AStar(AlgorithmInterface):

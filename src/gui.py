@@ -1,10 +1,10 @@
 import pygame
-from ui_element import UIElement, AlgorithmUI
-from algorithms.dijkstra import Dijkstra
-from algorithms.a_star import AStar
-from algorithms.breadth_first_search import BFS
-from controller import State
-from algorithms.algorithm import Result
+from src.ui_element import UIElement, AlgorithmUI
+from src.algorithms.dijkstra import Dijkstra
+from src.algorithms.a_star import AStar
+from src.algorithms.breadth_first_search import BFS
+from src.controller import State
+from src.algorithms.algorithm import Result
 
 
 class Window:
@@ -63,29 +63,29 @@ class Window:
 
 def create_ui_elements():
     ui_elements = []
-    brush = pygame.image.load('images/Brush.png')
+    brush = pygame.image.load('../images/Brush.png')
     ui_elements.append(UIElement(brush, 750, 25, State.DRAWING))
-    eraser = pygame.image.load('images/Eraser.png')
+    eraser = pygame.image.load('../images/Eraser.png')
     ui_elements.append(UIElement(eraser, 750, 100, State.ERASING))
-    start_node_button = pygame.image.load('images/StartNode.PNG')
+    start_node_button = pygame.image.load('../images/StartNode.PNG')
     ui_elements.append(UIElement(start_node_button, 750, 175, State.START_NODE))
-    end_node_button = pygame.image.load('images/EndNode.PNG')
+    end_node_button = pygame.image.load('../images/EndNode.PNG')
     ui_elements.append(UIElement(end_node_button, 750, 250, State.END_NODE))
-    go = pygame.image.load('images/GO.PNG')
+    go = pygame.image.load('../images/GO.PNG')
     ui_elements.append(UIElement(go, 850, 25, State.SOLVING, (125, 50)))
-    reset = pygame.image.load('images/Reset.PNG')
+    reset = pygame.image.load('../images/Reset.PNG')
     ui_elements.append(UIElement(reset, 850, 100, State.RESET, (125, 50)))
-    rerun = pygame.image.load('images/Rerun.PNG')
+    rerun = pygame.image.load('../images/Rerun.PNG')
     ui_elements.append(UIElement(rerun, 850, 175, State.RERUN, (125, 50)))
     return ui_elements
 
 
 def create_algorithm_ui():
     algorithm_elements = []
-    a_star = pygame.image.load('images/A-star.PNG')
+    a_star = pygame.image.load('../images/A-star.PNG')
     algorithm_elements.append(AlgorithmUI(a_star, 825, 625, State.ALGORITHM, AStar(), (125, 50)))
-    dijkstra = pygame.image.load('images/Dijkstra.PNG')
+    dijkstra = pygame.image.load('../images/Dijkstra.PNG')
     algorithm_elements.append(AlgorithmUI(dijkstra, 925, 550, State.ALGORITHM, Dijkstra(), (125, 50)))
-    bfs = pygame.image.load('images/BFS.PNG')
+    bfs = pygame.image.load('../images/BFS.PNG')
     algorithm_elements.append(AlgorithmUI(bfs, 750, 550, State.ALGORITHM, BFS(), (125, 50)))
     return algorithm_elements

@@ -1,5 +1,5 @@
 from enum import Enum
-from maze import Maze
+from src.maze import Maze
 
 
 class State(Enum):

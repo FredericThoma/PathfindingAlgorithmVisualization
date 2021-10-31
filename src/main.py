@@ -1,6 +1,6 @@
-from controller import *
-from maze import Maze
-from gui import *
+from src.controller import *
+from src.maze import Maze
+from src.gui import *
 
 
 def main():

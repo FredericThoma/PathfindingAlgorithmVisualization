@@ -1,6 +1,6 @@
-from cell import *
+from src.cell import *
 
-from algorithms.algorithm import *
+from src.algorithms.algorithm import *
 
 
 class Dijkstra(AlgorithmInterface):
