@@ -1,7 +1,1 @@
-Interface==2.11.1
-pygame==2.0.2
-python-interface==1.6.1
-six==1.16.0
-zope.event==4.5.0
-zope.interface==5.4.0
-zope.schema==6.2.0
+pygame==2.0.3

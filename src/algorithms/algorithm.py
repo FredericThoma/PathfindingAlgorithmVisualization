@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 
 
-
 class Result:
     def __init__(self, nodes_visited, found_exit, message):
         self.nodes_visited = nodes_visited

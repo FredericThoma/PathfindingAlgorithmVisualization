@@ -12,7 +12,6 @@ class BFS(AlgorithmInterface):
         current_cell = self.open_nodes.popleft()
         if current_cell is maze.end_cell:
             self.set_result(Result(self.return_nodes_visited(), True, "FOUND PATH!"))
-            #self.open_nodes.clear()
             self.set_solved_maze(True)
             self.backtrack(current_cell, maze.start_cell)
             return current_cell
@@ -46,7 +45,7 @@ class BFS(AlgorithmInterface):
         pass
 
     def backtrack(self, current_node, target_node):
-        if current_node.parent is None:
+        if current_node.parent is None or current_node is target_node:
             return
         else:
             self.best_path_nodes.append(current_node)

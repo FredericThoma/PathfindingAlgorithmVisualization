@@ -3,6 +3,7 @@ from src.maze import Maze
 from src.gui import *
 
 
+
 def main():
     pygame.init()
     clock = pygame.time.Clock()
