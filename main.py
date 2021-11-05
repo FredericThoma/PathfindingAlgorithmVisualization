@@ -3,7 +3,6 @@ from src.maze import Maze
 from src.gui import *
 
 
-
 def main():
     pygame.init()
     clock = pygame.time.Clock()
@@ -18,30 +17,31 @@ def main():
         controller.window.screen.fill((100, 100, 100))
         controller.window.draw_ui()
         controller.update()
+        current_state = controller.get_state()
         if pygame.mouse.get_pressed()[0]:
             x, y = pygame.mouse.get_pos()
             controller.handle_mouse_down(x, y)
-        if controller.state is controller.state.START_NODE:
+        if current_state is current_state.START_NODE:
             current_cell = controller.maze.start_cell
-        if controller.state is controller.state.SOLVING and not controller.algorithm.solved_maze:
+        if current_state is current_state.SOLVING and not controller.algorithm.solved_maze:
             if controller.check_start_end_node():
                 frame_rate = 40
-                controller.algorithm.initialize(controller.maze)
+                #controller.algorithm.initialize(controller.maze)
                 current_cell = controller.algorithm.next_step(current_cell, controller.maze)
                 controller.algorithm.mark_visited_cells()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        if controller.state is controller.state.RESET:
-            controller.set_state(controller.state.DRAWING)
+        if current_state is current_state.RESET:
+            controller.set_state(current_state.DRAWING)
             controller.reset()
-        if controller.state is controller.state.RERUN:
+        if current_state is current_state.RERUN:
+            controller.maze.reset_cells()
             current_cell = controller.maze.start_cell
-            controller.set_state(controller.state.SOLVING)
+            controller.set_state(current_state.SOLVING)
             controller.reset_algorithm()
         if controller.algorithm.solved_maze:
             controller.window.result_to_ui(controller.algorithm.result)
-
         controller.maze.update_state()
         controller.window.draw_maze(controller.maze)
         pygame.display.update()
