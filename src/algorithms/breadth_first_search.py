@@ -5,6 +5,8 @@ from collections import deque
 class BFS(AlgorithmInterface):
 
     def next_step(self, current_cell, maze):
+        if current_cell is maze.start_cell and not self.initialized:
+            self.initialize(maze)
         if len(self.open_nodes) == 0:
             self.set_result(Result(self.return_nodes_visited(), False, "NO PATH!"))
             self.set_solved_maze(True)
@@ -17,9 +19,10 @@ class BFS(AlgorithmInterface):
             return current_cell
         neighbors = self.get_neighbors(current_cell, maze)
         for n in neighbors:
-            if n.traversable and not self.closed_nodes.__contains__(n):
+            if n.traversable and not n.visited:
                 n.parent = current_cell
                 self.closed_nodes.append(n)
+                n.visited = True
                 self.open_nodes.append(n)
         return current_cell
 
@@ -33,13 +36,11 @@ class BFS(AlgorithmInterface):
                 cell.set_color((0, 25, 255, 100))
 
     def initialize(self, maze):
-        if self.initialized:
-            return
-        else:
-            self.set_initialized(True)
-            self.open_nodes = deque()
-            self.closed_nodes.append(maze.start_cell)
-            self.open_nodes.append(maze.start_cell)
+        self.set_initialized(True)
+        self.open_nodes = deque()
+        self.closed_nodes.append(maze.start_cell)
+        maze.start_cell.visited = True
+        self.open_nodes.append(maze.start_cell)
 
     def find_min_in_open_nodes(self):
         pass

@@ -5,10 +5,11 @@ class Cell:
         self.y_coord = y
         self.traversable = traversable
         self.color = (200, 200, 200)
-        self.g_cost = 99999999  # dist to start node
-        self.h_cost = 99999999  # dist to end node
+        self.g_cost = float('inf')  # dist to start node
+        self.h_cost = float('inf')  # dist to end node
         self.f_cost = self.g_cost + self.h_cost  # sum of distances to start and end
         self.parent = None
+        self.visited = False
 
     def get_color(self):
         return self.color
@@ -24,10 +25,11 @@ class Cell:
 
     def reset(self):
         self.set_color((200, 200, 200) if self.traversable else (50, 50, 50))
-        self.g_cost = 99999999
-        self.h_cost = 99999999
+        self.g_cost = float('inf')
+        self.h_cost = float('inf')
         self.f_cost = self.g_cost + self.h_cost
         self.parent = None
+        self.visited = False
 
     def calc_dists(self, parent_cell, maze):
         new_g_cost = parent_cell.g_cost + dist_between_cells(self, parent_cell, maze)

@@ -99,3 +99,6 @@ class Controller:
         self.maze.reset_cells()
         new.mark_visited_cells()
         self.algorithm = new
+
+    def get_state(self):
+        return self.state
