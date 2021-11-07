@@ -27,11 +27,11 @@ The following algorithms were added so far:
 
 For the automatic maze-generation the cellular automaton B3/S1234 was used. (https://en.wikipedia.org/wiki/Maze_generation_algorithm#Cellular_automaton_algorithms)
 
-In case you are wondering why this particular method was used instead of a randomized iterative or recursive approach, let's look at the pros and cons:
+In case you are wondering why this particular method was used instead of a randomized iterative or recursive approach, let's look at the pros and cons of the cullular automata method:
 
 CONS (opposed to most other methods)
 1. final maze is predetermined by the starting state => predictable, repeating patterns
-2. solvability cannot be insured
+2. solvability cannot be ensured
 3. no trivial break condition => unneccessary work
 
 
