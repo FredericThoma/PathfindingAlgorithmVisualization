@@ -11,8 +11,8 @@ class Window:
     def __init__(self):
         self.screen = pygame.display.set_mode((1080, 720))
         self.font = pygame.font.SysFont('Comic Sans MS', 30)
-        self.ui_elements = create_ui_elements()
-        self.algorithm_ui = create_algorithm_ui()
+        self.ui_elements = self.create_ui_elements()
+        self.algorithm_ui = self.create_algorithm_ui()
 
     def result_to_ui(self, result: Result):
         if result is None:
@@ -61,31 +61,32 @@ class Window:
                 element.active = True
 
 
-def create_ui_elements():
-    ui_elements = []
-    brush = pygame.image.load('images/Brush.png')
-    ui_elements.append(UIElement(brush, 750, 25, State.DRAWING))
-    eraser = pygame.image.load('images/Eraser.png')
-    ui_elements.append(UIElement(eraser, 750, 100, State.ERASING))
-    start_node_button = pygame.image.load('images/StartNode.PNG')
-    ui_elements.append(UIElement(start_node_button, 750, 175, State.START_NODE))
-    end_node_button = pygame.image.load('images/EndNode.PNG')
-    ui_elements.append(UIElement(end_node_button, 750, 250, State.END_NODE))
-    go = pygame.image.load('images/GO.PNG')
-    ui_elements.append(UIElement(go, 850, 25, State.SOLVING, (125, 50)))
-    reset = pygame.image.load('images/Reset.PNG')
-    ui_elements.append(UIElement(reset, 850, 100, State.RESET, (125, 50)))
-    rerun = pygame.image.load('images/Rerun.PNG')
-    ui_elements.append(UIElement(rerun, 850, 175, State.RERUN, (125, 50)))
-    return ui_elements
+    def create_ui_elements(self):
+        ui_elements = []
+        brush = pygame.image.load('images/Brush.png')
+        ui_elements.append(UIElement(brush, 750, 25, State.DRAWING))
+        eraser = pygame.image.load('images/Eraser.png')
+        ui_elements.append(UIElement(eraser, 750, 100, State.ERASING))
+        start_node_button = pygame.image.load('images/StartNode.PNG')
+        ui_elements.append(UIElement(start_node_button, 750, 175, State.START_NODE))
+        end_node_button = pygame.image.load('images/EndNode.PNG')
+        ui_elements.append(UIElement(end_node_button, 750, 250, State.END_NODE))
+        go = pygame.image.load('images/GO.PNG')
+        ui_elements.append(UIElement(go, 850, 25, State.SOLVING, (125, 50)))
+        reset = pygame.image.load('images/Reset.PNG')
+        ui_elements.append(UIElement(reset, 850, 100, State.RESET, (125, 50)))
+        rerun = pygame.image.load('images/Rerun.PNG')
+        ui_elements.append(UIElement(rerun, 850, 175, State.RERUN, (125, 50)))
+        return ui_elements
 
 
-def create_algorithm_ui():
-    algorithm_elements = []
-    a_star = pygame.image.load('images/A-star.PNG')
-    algorithm_elements.append(AlgorithmUI(a_star, 825, 625, State.ALGORITHM, AStar(), (125, 50)))
-    dijkstra = pygame.image.load('images/Dijkstra.PNG')
-    algorithm_elements.append(AlgorithmUI(dijkstra, 925, 550, State.ALGORITHM, Dijkstra(), (125, 50)))
-    bfs = pygame.image.load('images/BFS.PNG')
-    algorithm_elements.append(AlgorithmUI(bfs, 750, 550, State.ALGORITHM, BFS(), (125, 50)))
-    return algorithm_elements
+    def create_algorithm_ui(self):
+        algorithm_elements = []
+        a_star = pygame.image.load('images/A-star.PNG')
+        algorithm_elements.append(AlgorithmUI(a_star, 825, 625, State.ALGORITHM, AStar(), (125, 50)))
+        dijkstra = pygame.image.load('images/Dijkstra.PNG')
+        algorithm_elements.append(AlgorithmUI(dijkstra, 925, 550, State.ALGORITHM, Dijkstra(), (125, 50)))
+        bfs = pygame.image.load('images/BFS.PNG')
+        algorithm_elements.append(AlgorithmUI(bfs, 750, 550, State.ALGORITHM, BFS(), (125, 50)))
+        return algorithm_elements
+

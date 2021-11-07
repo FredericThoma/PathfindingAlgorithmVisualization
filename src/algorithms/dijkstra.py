@@ -16,7 +16,6 @@ class Dijkstra(AlgorithmInterface):
                 cell.set_color((0, 0, 255))
 
     def initialize(self, maze):
-
         self.set_initialized(True)
         for row in maze.cell_array:
             for cell in row:
@@ -29,11 +28,13 @@ class Dijkstra(AlgorithmInterface):
             self.initialize(maze)
             return current_cell
         if current_cell is maze.end_cell:
+            print("END CELL")
             self.set_result(Result(self.return_nodes_visited(), True, "FOUND PATH!"))
             self.set_solved_maze(True)
             self.backtrack(maze.end_cell, maze.start_cell)
             return
         elif len(self.open_nodes) == 0 or current_cell is None:
+            print("NONE OR LEN 0")
             self.set_result(Result(self.return_nodes_visited(), False, "NO PATH FOUND"))
             self.set_solved_maze(True)
         else:

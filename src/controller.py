@@ -12,6 +12,7 @@ class State(Enum):
     RESET = 7
     RERUN = 8
     DONE = 9
+    PASSING = 10
 
 
 class Controller:
@@ -38,14 +39,16 @@ class Controller:
     def request_element_update(self, ui_element):
         if self.algorithm.solved_maze:
             self.set_state(self.state.DONE)
-        if self.state is not self.state.SOLVING:
-            if ui_element.related_state is State.ALGORITHM:
-                self.set_active_algorithm(ui_element.related_algorithm)
-            else:
-                self.set_state(ui_element.related_state)
-                self.update_ui_elements()
+        if ui_element.related_state is State.ALGORITHM:
+            self.set_state(self.state.PASSING)
+            self.set_active_algorithm(ui_element.related_algorithm)
+        else:
+            self.set_state(ui_element.related_state)
+            self.update_ui_elements()
 
     def set_active_algorithm(self, related_algorithm):
+        print("REACHED")
+        print(related_algorithm.result)
         self.algorithm = related_algorithm
         for element in self.window.algorithm_ui:
             if element.related_algorithm is related_algorithm:
@@ -77,6 +80,8 @@ class Controller:
         return True
 
     def reset(self):
+        for element in self.window.algorithm_ui:
+            element.related_algorithm = element.related_algorithm.get_new_instance()
         self.algorithm.set_defaults()
         self.set_state(self.state.DRAWING)
         self.update_ui_elements()
