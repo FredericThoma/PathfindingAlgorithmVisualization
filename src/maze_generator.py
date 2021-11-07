@@ -1,7 +1,34 @@
-import pygame
 import random
-from src.gui import Window
-from src.maze import Maze
+
+
+class MazeGenerator:
+    def __init__(self):
+        self.initialized_maze = False
+        self.maze_bool_representation = []
+        self.iteration_counter = 0
+
+    def reset(self):
+        self.initialized_maze = False
+        self.maze_bool_representation = []
+        self.iteration_counter = 0
+
+    def next_step(self, maze):
+        self.iteration_counter += 1
+        if not self.initialized_maze:
+            self.initialized_maze = True
+            init_maze(maze)
+            self.maze_bool_representation = bool_array_from_maze(maze)
+        if self.iteration_counter > 100:
+            return
+        for row in maze.cell_array:
+            for cell in row:
+                neighbor_indices = get_indices_of_neighbors(cell, maze)
+                alive_neighbor_count = count_alive_neighbors(self.maze_bool_representation, neighbor_indices)
+                if should_be_alive(cell, alive_neighbor_count):
+                    cell.un_mark()
+                else:
+                    cell.mark()
+        self.maze_bool_representation = bool_array_from_maze(maze)
 
 
 def bool_array_from_maze(maze):
@@ -31,23 +58,9 @@ def get_indices_of_neighbors(cell, maze):
     for i in range(row - 1, row + 2):
         for j in range(col - 1, col + 2):
             current_cell = maze.cell_from_indices(i, j)
-            if current_cell:
-                if not current_cell == cell:
-                    neighbors.append((i, j))
+            if current_cell and not current_cell == cell:
+                neighbors.append((i, j))
     return neighbors
-
-
-def next_step(prev_states, maze):
-    for row in maze.cell_array:
-        for cell in row:
-            neighbor_indices = get_indices_of_neighbors(cell, maze)
-            alive_neighbor_count = count_alive_neighbors(prev_states, neighbor_indices)
-            if should_be_alive(cell, alive_neighbor_count):
-                cell.un_mark()
-            else:
-                cell.mark()
-    new_state = bool_array_from_maze(maze)
-    return new_state
 
 
 def should_be_alive(cell, neighbor_count):
@@ -65,27 +78,3 @@ def count_alive_neighbors(prev_states, neighbor_indices):
         if prev_states[i][j]:
             count += 1
     return count
-
-
-def main():
-    clock = pygame.time.Clock()
-    pygame.init()
-    window = Window()
-    maze = Maze(36, 36, 20)
-    init_maze(maze)
-    current_state = bool_array_from_maze(maze)
-    count = 0
-    while True:
-        count += 1
-        clock.tick(10)
-        window.draw_maze(maze)
-        if count < 200:
-            current_state = next_step(current_state, maze)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                return
-        pygame.display.update()
-
-
-if __name__ == '__main__':
-    main()

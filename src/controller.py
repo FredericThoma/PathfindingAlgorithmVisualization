@@ -13,15 +13,17 @@ class State(Enum):
     RERUN = 8
     DONE = 9
     PASSING = 10
+    AUTO_GEN = 11
 
 
 class Controller:
 
-    def __init__(self, maze, window, algorithm):
+    def __init__(self, maze, window, algorithm, generator):
         self.state = State.DRAWING
         self.maze = maze
         self.window = window
         self.algorithm = algorithm
+        self.generator = generator
 
     def update(self):
         if self.state.DRAWING:
@@ -89,6 +91,7 @@ class Controller:
         new = self.window.get_active_algorithm().get_new_instance()
         new.set_defaults()
         self.algorithm = new
+        self.generator.reset()
 
     def set_state(self, new_state: State):
         self.state = new_state

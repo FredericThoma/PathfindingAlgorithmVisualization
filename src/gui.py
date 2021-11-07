@@ -77,6 +77,9 @@ class Window:
         ui_elements.append(UIElement(reset, 850, 100, State.RESET, (125, 50)))
         rerun = pygame.image.load('images/Rerun.PNG')
         ui_elements.append(UIElement(rerun, 850, 175, State.RERUN, (125, 50)))
+        auto_gen = pygame.image.load('images/AutoGen.PNG')
+        ui_elements.append(UIElement(auto_gen, 850, 250, State.AUTO_GEN, (125, 50)))
+
         return ui_elements
 
 
