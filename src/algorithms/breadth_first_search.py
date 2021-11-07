@@ -25,12 +25,12 @@ class BFS(AlgorithmInterface):
 
     def mark_visited_cells(self):
         for cell in self.closed_nodes:
-            cell.set_color((200, 0, 0))
+            cell.set_color((255, 73, 0, 100))
         for cell in self.open_nodes:
-            cell.set_color((0, 255, 0))
+            cell.set_color((135, 255, 66, 100))
         for cell in self.best_path_nodes:
             if cell is not None:
-                cell.set_color((0, 0, 255))
+                cell.set_color((0, 25, 255, 100))
 
     def initialize(self, maze):
         if self.initialized:

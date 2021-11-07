@@ -48,6 +48,6 @@ class Maze:
         for row in self.cell_array:
             for cell in row:
                 if self.start_cell is cell:
-                    cell.set_color((255, 0, 0))
+                    cell.set_color((114, 121, 179, 70))
                 elif self.end_cell is cell:
-                    cell.set_color((255, 0, 0))
+                    cell.set_color((114, 121, 179, 70))
