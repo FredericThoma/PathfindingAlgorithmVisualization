@@ -49,8 +49,6 @@ class Controller:
             self.update_ui_elements()
 
     def set_active_algorithm(self, related_algorithm):
-        print("REACHED")
-        print(related_algorithm.result)
         self.algorithm = related_algorithm
         for element in self.window.algorithm_ui:
             if element.related_algorithm is related_algorithm:
