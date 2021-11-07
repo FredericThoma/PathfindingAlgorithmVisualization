@@ -19,9 +19,11 @@ class Cell:
 
     def mark(self):
         self.traversable = False
+        self.set_color((50, 50, 50))
 
     def un_mark(self):
         self.traversable = True
+        self.set_color((200, 200, 200))
 
     def reset(self):
         self.set_color((200, 200, 200) if self.traversable else (50, 50, 50))
